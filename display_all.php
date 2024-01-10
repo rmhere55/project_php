@@ -82,8 +82,36 @@ include('./function/comman_fun.php');
 <div class="row">
 <?php
 geetingfun();
-unique_category();
-unique_brand();
+
+// $select_query = "SELECT * FROM `product` order by rand() limit 0,3";
+
+// $result_query = mysqli_query($con , $select_query);
+// // $row = mysqLi_fetch_assoc($result_query);
+// echo $row['product_title'];
+// while($row = mysqLi_fetch_assoc($result_query)){
+//   $product_id = $row['product_id'];
+
+// $product_title = $row['product_title'];
+// $product_description = $row['product_description'];
+// // $product_keyword = $row['product_keyword'];
+// $product_cataogries = $row['catagory_id'];
+// $product_brand = $row['brand_id'];
+// $product_price = $row['product_price'];
+// $product_image1 = $row['product_image1'];
+
+// echo "<div class='col-md-3'>
+// <div class='card  ' style='width: 18rem;'>
+//   <img src='./admit_area/product_img/$product_image1' class='card-img-top' alt='$product_title'>
+//   <div class='card-body'>
+//     <h5 class='card-title'>$product_title </h5>
+//     <p class='card-text'>$product_description </p>
+//     <a href='#' class='btn btn-primary'>Add cart</a>
+//     <a href='#' class='btn btn-secondary'>view more</a>
+//   </div>
+// </div>
+// </div>";
+
+// }
 ?>
 
 <!-- 
@@ -212,9 +240,6 @@ unique_brand();
           <a class="nav-link disabled" aria-disabled="true">Disabled</a>
         </li>
     </div> -->
-    <?php
-include('includes/footer.php');
-    ?>
     </div></div>
 
 
