@@ -8,7 +8,7 @@ function geetingfun(){
     if (isset($_GET['catagory'])){
     if (isset($_GET['brand'])){
 
-$select_query = "SELECT * FROM `product` order by rand() limit 0,3";
+$select_query = "SELECT * FROM `product` order by rand() limit 0,4";
 
 $result_query = mysqli_query($con , $select_query);
 // $row = mysqLi_fetch_assoc($result_query);
@@ -31,7 +31,7 @@ echo "<div class='col-md-3'>
     <h5 class='card-title'>$product_title </h5>
     <p class='card-text'>$product_description </p>
     <a href='#' class='btn btn-primary'>Add cart</a>
-    <a href='#' class='btn btn-secondary'>view more</a>
+    <a href='produc_detail.php?product_id=$product_id ' class='btn btn-secondary'>view more</a>
   </div>
 </div>
 </div>";
@@ -41,7 +41,45 @@ echo "<div class='col-md-3'>
 }
 
 // get all product 
-function
+function get_all_product(){
+  global $con;
+  // condition to check is set 
+  if (isset($_GET['catagory'])){
+  if (isset($_GET['brand'])){
+
+$select_query = "SELECT * FROM `product` order by rand() ";
+
+$result_query = mysqli_query($con , $select_query);
+// $row = mysqLi_fetch_assoc($result_query);
+echo $row['product_title'];
+while($row = mysqLi_fetch_assoc($result_query)){
+$product_id = $row['product_id'];
+
+$product_title = $row['product_title'];
+$product_description = $row['product_description'];
+// $product_keyword = $row['product_keyword'];
+$product_cataogries = $row['catagory_id'];
+$product_brand = $row['brand_id'];
+$product_price = $row['product_price'];
+$product_image1 = $row['product_image1'];
+
+echo "<div class='col-md-3'>
+<div class='card  ' style='width: 18rem;'>
+<img src='./admit_area/product_img/$product_image1' class='card-img-top' alt='$product_title'>
+<div class='card-body'>
+  <h5 class='card-title'>$product_title </h5>
+  <p class='card-text'>$product_description </p>
+  <a href='#' class='btn btn-primary'>Add cart</a>
+  <a href='produc_detail.php?product_id=$product_id ' class='btn btn-secondary'>view more</a>
+</div>
+</div>
+</div>";
+
+}
+  }}
+
+
+}
 
 
 
@@ -84,7 +122,7 @@ echo "<div class='col-md-3'>
     <h5 class='card-title'>$product_title </h5>
     <p class='card-text'>$product_description </p>
     <a href='#' class='btn btn-primary'>Add cart</a>
-    <a href='#' class='btn btn-secondary'>view more</a>
+    <a href='produc_detail.php?product_id=$product_id ' class='btn btn-secondary'>view more</a>
   </div>
 </div>
 </div>";
@@ -130,7 +168,7 @@ echo "<div class='col-md-3'>
     <h5 class='card-title'>$product_title </h5>
     <p class='card-text'>$product_description </p>
     <a href='#' class='btn btn-primary'>Add cart</a>
-    <a href='#' class='btn btn-secondary'>view more</a>
+    <a href='produc_detail.php?product_id=$product_id ' class='btn btn-secondary'>view more</a>
   </div>
 </div>
 </div>";
@@ -192,4 +230,110 @@ function getcatagors(){
      // Close the result set
      mysqli_free_result($result_catagory);
 }
+
+// searching data 
+function searchData() {
+  // geetingfun();
+  global $con;
+  // condition to check is set 
+  // if (isset($_GET['catagory'])){
+  if (isset($_GET['search_data_product'])){
+    $search_data_value = $_GET['search_data'];
+$select_query = "SELECT * FROM `product` where product_keyword like '%$search_data_value%'";
+
+$result_query = mysqli_query($con , $select_query);
+$num_of_row = mysqli_num_rows($result_query);
+if ($num_of_row ==0){
+    echo "<h2 class='text-center text-danger'>Sorry ! brand Not in stock </h2>";
+    
+
+}
+
+// $row = mysqLi_fetch_assoc($result_query);
+echo $row['product_title'];
+while($row = mysqLi_fetch_assoc($result_query)){
+$product_id = $row['product_id'];
+
+$product_title = $row['product_title'];
+$product_description = $row['product_description'];
+$product_keyword = $row['product_keyword'];
+$product_cataogries = $row['catagory_id'];
+$product_brand = $row['brand_id'];
+$product_price = $row['product_price'];
+$product_image1 = $row['product_image1'];
+
+echo "<div class='col-md-3'>
+<div class='card  ' style='width: 18rem;'>
+<img src='./admit_area/product_img/$product_image1' class='card-img-top' alt='$product_title'>
+<div class='card-body'>
+  <h5 class='card-title'>$product_title </h5>
+  <p class='card-text'>$product_description </p>
+  <a href='#' class='btn btn-primary'>Add cart</a>
+  <a href='produc_detail.php?product_id=$product_id ' class='btn btn-secondary'>view more</a>
+</div>
+</div>
+</div>";
+
+}
+}
+}
+// view detail function
+function view_detail(){
+  global $con;
+  // condition to check is set 
+  if(isset($_GET['product_id'])){
+  if (isset($_GET['catagory'])){
+  if (isset($_GET['brand'])){
+$product_id =$_GET['product_id'];
+$select_query = "SELECT * FROM `product` where product_id = $product_id";
+
+$result_query = mysqli_query($con , $select_query);
+// $row = mysqLi_fetch_assoc($result_query);
+echo $row['product_title'];
+while($row = mysqLi_fetch_assoc($result_query)){
+$product_id = $row['product_id'];
+
+$product_title = $row['product_title'];
+$product_description = $row['product_description'];
+// $product_keyword = $row['product_keyword'];
+$product_cataogries = $row['catagory_id'];
+$product_brand = $row['brand_id'];
+$product_price = $row['product_price'];
+$product_image1 = $row['product_image1'];
+$product_image2 = $row['product_image2'];
+$product_image3 = $row['product_image3'];
+
+echo "<div class='col-md-3'>
+<div class='card  ' style='width: 18rem;'>
+<img src='./admit_area/product_img/$product_image1' class='card-img-top' alt='$product_title'>
+<div class='card-body'>
+  <h5 class='card-title'>$product_title </h5>
+  <p class='card-text'>$product_description </p>
+  <a href='#' class='btn btn-primary'>Add cart</a>
+  <a href='produc_detail.php?product_id=$product_id ' class='btn btn-secondary'>view more</a>
+</div>
+</div>
+</div> 
+
+<div class='col-md-8'>
+<!-- related images -->
+<div class='row'>
+    <div class='col-md-12'>
+        <h4 class='text-center text-info mb-5'>Related Products</h4>
+    </div>
+    <div class='col-md-6'>
+        
+<img src='./admit_area/product_img/$product_image2' class='card-img-top' alt='$product_title'>
+    </div>
+
+    <div class='col-md-6'>
+
+<img src='./admit_area/product_img/$product_image3' class='card-img-top' alt='$product_title'>
+    </div>
+
+</div>";
+
+}
+  }}
+}}
 ?>
